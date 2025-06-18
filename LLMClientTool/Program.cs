@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using System.Text;
 
 namespace LLMClientTool
 {
   class Program
   {
-    private const string MODEL = "llama3.2";
-    //private const string MODEL = "qwen2.5:0.5b";
+    //private const string MODEL = "llama3.2";
+    private const string MODEL = "qwen2.5:0.5b";
     private const string CHAT_URL = "http://localhost:11434/api/chat";
     static readonly HttpClient client = new();
 
@@ -23,7 +18,7 @@ namespace LLMClientTool
       ContractResolver = new CamelCasePropertyNamesContractResolver(),
       Converters =
       [
-        new StringEnumConverter()
+        new StringEnumConverter(new CamelCaseNamingStrategy(processDictionaryKeys: true, overrideSpecifiedNames: false))
       ],
     };
 

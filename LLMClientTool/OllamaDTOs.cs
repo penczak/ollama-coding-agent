@@ -10,7 +10,6 @@ namespace LLMClientTool
     public bool Done { get; set; }
   }
 
-  [JsonConverter(typeof(StringEnumConverter))]
   public enum OllamaRole
   {
     System,
