@@ -12,20 +12,19 @@ namespace LLMClientTool
 {
   class Program
   {
-    //private const string MODEL = "phi4";
-    private const string MODEL = "qwen2.5:0.5b";
+    private const string MODEL = "llama3.2";
+    //private const string MODEL = "qwen2.5:0.5b";
     private const string CHAT_URL = "http://localhost:11434/api/chat";
-    static readonly HttpClient client = new HttpClient();
+    static readonly HttpClient client = new();
 
-    static List<OllamaMessage> ChatHistory = new List<OllamaMessage>();
-
-    static JsonSerializerSettings serializerSettings = new JsonSerializerSettings()
+    private static readonly List<OllamaMessage> ChatHistory = [];
+    private static readonly JsonSerializerSettings serializerSettings = new()
     {
       ContractResolver = new CamelCasePropertyNamesContractResolver(),
-      Converters = new List<JsonConverter>
-      {
+      Converters =
+      [
         new StringEnumConverter()
-      },
+      ],
     };
 
     static async Task Main(string[] args)
@@ -69,7 +68,7 @@ namespace LLMClientTool
       {
         Model = MODEL,
         Messages = messages,
-        Tools = OllamaToolDefinitionHelper.GetOllamaToolDefinitions(),
+        Tools = ToolDefinitions.GetOllamaToolDefinitions(),
       };
     }
 
@@ -77,8 +76,8 @@ namespace LLMClientTool
     {
       var json = JsonConvert.SerializeObject(payload, serializerSettings);
 
-      //ConsoleExt.WriteLineYellow("json payload:");
-      //ConsoleExt.WriteLineYellow(json);
+      ConsoleExt.WriteLineYellow("json payload:");
+      ConsoleExt.WriteLineYellow(json);
 
       var content = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -98,7 +97,7 @@ namespace LLMClientTool
     {
       using var reader = new System.IO.StreamReader(await content.ReadAsStreamAsync());
       string? line;
-      OllamaMessage fullMessage = new OllamaMessage()
+      OllamaMessage fullMessage = new()
       {
         Content = string.Empty,
         Role = OllamaRole.Assistant,
@@ -121,7 +120,13 @@ namespace LLMClientTool
 
           string toolResult = toolCall.Function.Name switch
           {
-            nameof(Functions.ListDirectory) => Functions.ListDirectory(toolCall.Function.Arguments["relativeDirectoryPath"], bool.Parse(toolCall.Function.Arguments["recurse"])),
+            nameof(Functions.ListDirectory) => Functions.ListDirectory(
+              toolCall.Function.Arguments[ToolDefinitions.RelativeDirectoryPath],
+              bool.Parse(toolCall.Function.Arguments[ToolDefinitions.Recurse])
+            ),
+            nameof(Functions.GetFileContents) => Functions.GetFileContents(
+              toolCall.Function.Arguments[ToolDefinitions.RelativeFilePath]
+            ),
             _ => throw new InvalidOperationException($"Call made to unrecognized function: {toolCall.Function.Name}"),
           };
 
