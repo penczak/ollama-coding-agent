@@ -7,8 +7,9 @@ namespace LLMClientTool
 {
   class Program
   {
-    //private const string MODEL = "llama3.2";
-    private const string MODEL = "qwen2.5:0.5b";
+    private const string QWEN3_pt6b = "qwen3:0.6b";
+    private const string QWEN3_8b = "qwen3:8b";
+    private const string MODEL = QWEN3_8b;
     private const string CHAT_URL = "http://localhost:11434/api/chat";
     static readonly HttpClient client = new();
 
@@ -21,6 +22,10 @@ namespace LLMClientTool
         new StringEnumConverter(new CamelCaseNamingStrategy(processDictionaryKeys: true, overrideSpecifiedNames: false))
       ],
     };
+
+    private const string SYSTEM_PROMPT = @"
+You are a coding assistant. All your tools that interact with the file system are relative to the project directory.
+";
 
     static async Task Main(string[] args)
     {
@@ -71,8 +76,8 @@ namespace LLMClientTool
     {
       var json = JsonConvert.SerializeObject(payload, serializerSettings);
 
-      ConsoleExt.WriteLineYellow("json payload:");
-      ConsoleExt.WriteLineYellow(json);
+      //ConsoleExt.WriteLineYellow("json payload:");
+      //ConsoleExt.WriteLineYellow(json);
 
       var content = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -102,7 +107,7 @@ namespace LLMClientTool
       {
         var parsedResponse = JsonConvert.DeserializeObject<OllamaResponse>(line) ?? throw new FormatException($"Failed to parse OllamaResponse: {line}");
 
-        Console.Write(parsedResponse.Message.Content);
+        //Console.Write(parsedResponse.Message.Content);
 
         if (!parsedResponse.Done)
         {
@@ -132,7 +137,7 @@ namespace LLMClientTool
           });
         }
 
-        ConsoleExt.WriteLineYellow(line + Environment.NewLine);
+        //ConsoleExt.WriteLineYellow(line + Environment.NewLine);
       }
 
       ChatHistory.Add(fullMessage);
