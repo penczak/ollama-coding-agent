@@ -7,6 +7,14 @@
         "@modelcontextprotocol/server-filesystem",
         "C:\\Users\\Daniel\\source\\repos\\ollama-coding-agent\\test"
       ]
+    },
+    "dotnet": {
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "C:\\Users\\Daniel\\source\\repos\\ollama-coding-agent\\tools\\Mcp.Dotnet\\Mcp.Dotnet.csproj"
+      ]
     }
   }
 }
