@@ -22,6 +22,11 @@ namespace Mcp.Dotnet
       var cancellationSource = new CancellationTokenSource();
       Console.CancelKeyPress += (sender, e) =>
       {
+        if (cancellationSource.IsCancellationRequested == true)
+        {
+          // workaround for cancellation hanging (second press will exit)
+          Environment.Exit(0);
+        }
         Console.WriteLine("Shutdown signal received, beginning graceful shutdown");
         e.Cancel = true; // Prevent immediate termination
         cancellationSource.Cancel();

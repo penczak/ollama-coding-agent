@@ -1,8 +1,7 @@
 {
   "profiles": {
     "Mcp.Dotnet": {
-      "commandName": "Project",
-      "commandLineArgs": "--stdio"
+      "commandName": "Project"
     }
   }
 }

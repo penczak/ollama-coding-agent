@@ -1,5 +1,7 @@
 
+### interactive:
 mcphost -m ollama:qwen3:0.6b --config "C:\Users\Daniel\source\repos\ollama-coding-agent\mcp.json"
+### non-interactive:
 mcphost -m ollama:qwen3:0.6b --config "C:\Users\Daniel\source\repos\ollama-coding-agent\mcp.json" -p "what is 2+2?" --quiet
 
 https://github.com/mark3labs/mcphost

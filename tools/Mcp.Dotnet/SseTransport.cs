@@ -42,9 +42,9 @@ namespace Mcp.Dotnet
       {
         // Configure the provided builder - DON'T create a new one!
         mcpBuilder
-            .WithName(options.ServerName ?? "Simple MCP Server")
-            .WithVersion("1.0.0")
-            .WithInstructions("Example server with calculator and Warhammer 40k tools")
+          .WithName(options.ServerName ?? "Dotnet Tools MCP Server")
+          .WithVersion("1.0.0")
+          .WithInstructions("MCP Server with tools for building and testing dotnet projects")
             .WithLogLevel(logLevel)
             .WithPort(port)
             .WithHostname(hostname);
@@ -174,7 +174,9 @@ namespace Mcp.Dotnet
 
       */
 
+      Console.WriteLine("Building app");
       var app = builder.Build();
+      Console.WriteLine("App built");
 
       if (options.NoAuth)
       {
@@ -226,9 +228,11 @@ namespace Mcp.Dotnet
         // Use the WebApplication.RunAsync method without the cancellation token
         var serverTask = app.RunAsync($"http://{hostname}:{port}");
 
+        Console.WriteLine("Waiting for cancel");
         // Wait for cancellation
         await Task.Delay(Timeout.Infinite, cancellationSource.Token);
 
+        Console.WriteLine("Cancelled");
         // Stop the web application
         await app.StopAsync();
       }
