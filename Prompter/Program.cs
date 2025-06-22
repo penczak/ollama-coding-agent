@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 Console.WriteLine("Hello, World!");
 
-const string CMD_CONFIG = "-m ollama:qwen3:0.6b --config \"C:\\Users\\Daniel\\source\\repos\\ollama-coding-agent\\mcp.json\"";
+const string CMD_CONFIG = "-m ollama:qwen3:8b --config \"C:\\Users\\Daniel\\source\\repos\\ollama-coding-agent\\mcp.json\"";
 
 const string SYSTEM_PROMPT = @"
 You are a coding assistant with access to several tools for file reading & manipulation as well as dotnet commands for building and running tests. 
@@ -21,7 +21,7 @@ while (true) {
   var checkerOutput = await RunProcess("mcphost", $"{CMD_CONFIG} --system-prompt \"{SYSTEM_PROMPT}\" -p \"{prompt}\" --quiet");
 }
 
-private async string RunProcess(string filename, string args)
+async Task<string> RunProcess(string filename, string args)
 {
   var startInfo = new ProcessStartInfo
   {

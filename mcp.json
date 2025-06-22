@@ -5,14 +5,23 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "C:\\Users\\Daniel\\source\\repos\\ollama-coding-agent\\tools\\Mcp.Dotnet"
+        "C:\\Users\\Daniel\\source\\repos\\ollama-coding-agent\\test"
       ]
     },
-    "mix_server": {
+    "dotnet_tools_server": {
       "command": "uv",
       "args": [
         "--directory",
-        "C:\\Users\\Daniel\\source\\repos\\ollama-coding-agent\\tools\\mix_server",
+        "C:\\Users\\Daniel\\source\\repos\\ollama-coding-agent\\tools\\dotnet_tools_server",
+        "run",
+        "main.py"
+      ]
+    },
+    "session_tools_server": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "C:\\Users\\Daniel\\source\\repos\\ollama-coding-agent\\tools\\session_tools_server",
         "run",
         "main.py"
       ]

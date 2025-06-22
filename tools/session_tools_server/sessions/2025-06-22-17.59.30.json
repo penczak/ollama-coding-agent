@@ -1,0 +1,17 @@
+[
+  {
+    "role": "user",
+    "content": "please call the ListDirectory tool with the path \"C:\\Users\\Daniel\\source\\repos\\ollama-coding-agent\\test\"",
+    "tool_calls": []
+  },
+  {
+    "role": "tool",
+    "content": "Directory not found: C:\\Users\\Daniel\\source\\repos\\ollama-coding-agent\\test",
+    "tool_calls": []
+  },
+  {
+    "role": "assistant",
+    "content": "<think>\nOkay, the user wants me to call the ListDirectory tool with the given path. Let me check the function parameters. The ListDirectory function requires a relativeDirectoryPath and an optional recurse parameter. The user provided the path as \"C:\\Users\\Daniel\\source\\repos\\ollama-coding-agent\\test\". I need to make sure the relativeDirectoryPath is set to that path. Since the function doesn't mention anything about the project root, I should assume the default. Wait, the description says \"relative to the root of the project,\" but the user's path is specific. Maybe the default is correct, but perhaps I should include the path they provided. Also, the recurse parameter is optional, so I can leave it as false if they don't want to include all subdirectories. Let me structure the tool call with the relativeDirectoryPath as the provided path and set recurse to false.\n</think>\n\n",
+    "tool_calls": []
+  }
+]

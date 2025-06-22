@@ -1,0 +1,9 @@
+[project]
+name = "dotnet_tools_server"
+version = "0.1.0"
+description = "MCP Server with tools for building and running tests of dotnet projects"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp[cli]>=1.9.4"
+]
