@@ -5,7 +5,7 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "C:\\Users\\Daniel\\source\\repos\\ollama-coding-agent\\test"
+        "C:\\Users\\Daniel\\source\\repos\\ollama-coding-agent\\tools\\Mcp.Dotnet"
       ]
     },
     "mix_server": {
