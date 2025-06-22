@@ -158,7 +158,7 @@ wheels = [
 ]
 
 [[package]]
-name = "mix-server"
+name = "dotnet_tools_server"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
